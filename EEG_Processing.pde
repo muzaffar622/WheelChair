@@ -116,7 +116,7 @@ class EEG_Processing_User {
           detectedPeak[Ichan].threshold_dB = detection_thresh_dB;
           detectedPeak[Ichan].isDetected = true;
           hexBug.dive(); 
-          txt = "Dive";
+          txt = "Forward";
           isDetected = true;
         }
       } else {
@@ -143,19 +143,7 @@ class EEG_Processing_User {
               txt = "Right";
               isDetected = true;
             }
-          } else {
-            //did not detect right, try forward
-            Ichan = (5-1);
-            findPeakFrequency(fftData, Ichan);
-            if ((detectedPeak[Ichan].freq_Hz >= processing_band_low_Hz[3-1]) && (detectedPeak[Ichan].freq_Hz < processing_band_high_Hz[3-1])) {
-              if (detectedPeak[Ichan].SNR_dB >= detection_thresh_dB) {
-                detectedPeak[Ichan].threshold_dB = detection_thresh_dB;
-                detectedPeak[Ichan].isDetected = true;
-                hexBug.forward(); 
-                txt = "Forward";
-                isDetected = true;
-              }
-            }
+          } 
           }
         }
       }
@@ -202,10 +190,6 @@ class EEG_Processing_User {
       } else if (detectedPeak[Ichan].freq_Hz < processing_band_high_Hz[3-1]) {
         hexBug.forward(); 
         txt = "Forward";
-      } else if (detectedPeak[Ichan].freq_Hz < processing_band_high_Hz[4-1]) {
-        //the other way to get a LEFT command! 
-        hexBug.left();
-        txt = "Left";
       }
 
       //print some output
