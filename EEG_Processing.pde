@@ -115,7 +115,7 @@ class EEG_Processing_User {
         if (detectedPeak[Ichan].SNR_dB >= detection_thresh_dB) {
           detectedPeak[Ichan].threshold_dB = detection_thresh_dB;
           detectedPeak[Ichan].isDetected = true;
-          hexBug.dive(); 
+          hexBug.forward(); 
           txt = "Forward";
           isDetected = true;
         }
